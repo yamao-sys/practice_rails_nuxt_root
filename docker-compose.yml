@@ -19,6 +19,7 @@ services:
         WORKDIR: $WORKDIR
     environment:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      API_DOMAIN: "localhost:$FRONT_PORT"
     volumes:
       - "./api:/$WORKDIR"
     depends_on:
@@ -31,6 +32,7 @@ services:
       context: ./front
       args:
         WORKDIR: $WORKDIR
+        API_URL: "http://localhost:$API_PORT"
     # 環境に応じて起動コマンドが異なるため、明示的に起動コマンドを記載する
     command: yarn run dev
     volumes:
